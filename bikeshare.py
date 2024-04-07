@@ -11,7 +11,7 @@ MONTH_DICT = {'january' : 1 ,
               'april' : 4,
               'may' : 5,
               'june' : 6 }
-DAY_LIST = {'monday' : 0,
+DAY_DICT = {'monday' : 0,
             'tuesday' : 1,
             'wednesday' : 2,
             'thursday' : 3,
@@ -57,7 +57,7 @@ def get_filters():
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     day = "";
-    while (day not in DAY_LIST and day != ALL_STR):
+    while (day not in DAY_DICT and day != ALL_STR):
         print('\nPlease input a name of the day of week to filter by, or "all" to apply no day filter: ')
         day = input().lower()
 
@@ -90,7 +90,7 @@ def load_data(city, month, day):
         df = df[df['Month'] == MONTH_DICT[month]]
               
     if (day != ALL_STR):
-        df = df[df['Day Name'] == DAY_LIST[day]]
+        df = df[df['Day Name'] == DAY_DICT[day]]
 
     return df
 
@@ -107,7 +107,7 @@ def time_stats(df):
 
     # TO DO: display the most common day of week
     most_day_of_week = df['Day Name'].value_counts().index.tolist()[0]
-    print('\nThe most common day of week is: %s' % get_key_from_value_in_dictionary(DAY_LIST, most_day_of_week))
+    print('\nThe most common day of week is: %s' % get_key_from_value_in_dictionary(DAY_DICT, most_day_of_week))
 
     # TO DO: display the most common start hour
     most_hour = df['Hour'].value_counts().index.tolist()[0]
