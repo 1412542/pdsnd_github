@@ -5,7 +5,7 @@ import numpy as np
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
-MONTH_LIST = {'january' : 1 ,
+MONTH_DICT = {'january' : 1 ,
               'february' : 2,
               'march' : 3,
               'april' : 4,
@@ -51,7 +51,7 @@ def get_filters():
     # TO DO: get user input for month (all, january, february, ... , june)
     
     month = "";
-    while (month not in MONTH_LIST and month != ALL_STR):
+    while (month not in MONTH_DICT and month != ALL_STR):
         print('\nPlease input a name of the month {January, February, March, April, May, June} to filter by, or "all" to apply no month filter: ')
         month = input().lower()
 
@@ -87,7 +87,7 @@ def load_data(city, month, day):
     df['Hour'] = df['Start Time'].dt.hour
     
     if (month != ALL_STR):
-        df = df[df['Month'] == MONTH_LIST[month]]
+        df = df[df['Month'] == MONTH_DICT[month]]
               
     if (day != ALL_STR):
         df = df[df['Day Name'] == DAY_LIST[day]]
@@ -103,7 +103,7 @@ def time_stats(df):
 
     # TO DO: display the most common month
     most_month = df['Month'].value_counts().index.tolist()[0]
-    print('\nThe most common month is: %s' % get_key_from_value_in_dictionary(MONTH_LIST, most_month))
+    print('\nThe most common month is: %s' % get_key_from_value_in_dictionary(MONTH_DICT, most_month))
 
     # TO DO: display the most common day of week
     most_day_of_week = df['Day Name'].value_counts().index.tolist()[0]
